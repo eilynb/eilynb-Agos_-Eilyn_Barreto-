@@ -1,0 +1,61 @@
+ package Tests.Clase10;
+
+import Utilities.GetProperties;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.Sleeper;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+import java.util.List;
+
+import static java.sql.DriverManager.getDriver;
+
+public class Ejerciciosclase10 {
+
+    private static final String FACEBOOK_URL = "https://www.facebook.com/" ;
+    private WebDriver driver;
+    private void inicializarDriver(String url) {
+        GetProperties properties = new GetProperties();
+        String chromeDriverUrl = properties.getString("CHROMEDRIVER_PATH");
+        System.setProperty("webdriver.chrome.driver",
+                "C:\\Users\\ebarreto_ext\\IdeaProjects\\CursoAutomatizacion\\drivers\\chromedriver.exe");
+        driver = new ChromeDriver();
+        driver.get(url);
+    }
+
+ @Test
+    public void fullRegistrationTest() throws InterruptedException {
+        Crear un método de test llamado fullRegistrationTest
+        Ir a Facebook httpswww.facebook.com
+        Completar los campos de registro con los siguientes valores
+        First Name “John”
+        Last Name “Smith”
+        Mobile “5555555”
+        New Password “123456789”
+        Birthday Jun 26 1980
+        Gender Male
+
+        inicializarDriver(FACEBOOK_URL);
+        driver.findElement(By.id(u_0_2)).click();
+        Thread.sleep(3000);
+        driver.findElement(By.name(firstname)).sendKeys(John);
+        driver.findElement(By.name(lastname)).sendKeys(Smith);
+        driver.findElement(By.name(reg_email__)).sendKeys(5555555);
+        driver.findElement(By.name(reg_passwd__)).sendKeys(123456789);
+
+        WebElement mes = driver.findElement(By.name(birthday_month));
+        Select unmes = new Select(mes);
+        unmes.selectByVisibleText(Jun);
+
+        WebElement dia= driver.findElement(By.name(birthday_day));
+        Select undia= new Select(dia);
+        undia.selectByValue(26);
+
+        WebElement año= driver.findElement(By.name(birthday_year));
+        Select unaño= new Select(año);
+        unaño.selectByValue(1980);
+    }
